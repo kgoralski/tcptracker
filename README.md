@@ -1,4 +1,6 @@
 [![tests](https://github.com/kgoralski/tcptracker/actions/workflows/tests.yml/badge.svg)](https://github.com/kgoralski/tcptracker/actions/workflows/tests.yml)
+[![build](https://github.com/kgoralski/tcptracker/actions/workflows/build.yml/badge.svg)](https://github.com/kgoralski/tcptracker/actions/workflows/build.yml)
+[![lint](https://github.com/kgoralski/tcptracker/actions/workflows/lint.yml/badge.svg)](https://github.com/kgoralski/tcptracker/actions/workflows/lint.yml)
 
 # TCP Tracker
 
