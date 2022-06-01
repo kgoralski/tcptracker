@@ -1,6 +1,7 @@
 [![tests](https://github.com/kgoralski/tcptracker/actions/workflows/tests.yml/badge.svg)](https://github.com/kgoralski/tcptracker/actions/workflows/tests.yml)
 [![build](https://github.com/kgoralski/tcptracker/actions/workflows/build.yml/badge.svg)](https://github.com/kgoralski/tcptracker/actions/workflows/build.yml)
 [![lint](https://github.com/kgoralski/tcptracker/actions/workflows/lint.yml/badge.svg)](https://github.com/kgoralski/tcptracker/actions/workflows/lint.yml)
+[![codecov](https://codecov.io/github/kgoralski/tcptracker/branch/main/graph/badge.svg?token=CB7CGUU2DN)](https://codecov.io/github/kgoralski/tcptracker)
 
 # TCP Tracker
 
