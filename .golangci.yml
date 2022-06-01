@@ -1,0 +1,7 @@
+linters-settings:
+  lll:
+    line-length: 140
+linters:
+  enable:
+    - lll
+    - revive
