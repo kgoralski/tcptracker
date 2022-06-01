@@ -1,7 +1,7 @@
 on: [push, pull_request]
-name: tests
+name: lint
 jobs:
-  tests:
+  lint:
     strategy:
       matrix:
         go-version: [1.18.x]
@@ -13,6 +13,6 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - uses: actions/checkout@v3
       - run: sudo apt-get update && sudo apt-get install libpcap-dev
-      - run: make dep
-      - run: go test -race -coverprofile=coverage.out -covermode=atomic
-        uses: codecov/codecov-action@v2
+      - run: go mod tidy
+      - run: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.46.2
+      - run: make lint
