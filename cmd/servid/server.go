@@ -52,7 +52,7 @@ func (app *App) configureLogger() {
 	zerolog.TimeFieldFormat = "2006-01-02 15:04:05"
 	zerolog.ErrorStackMarshaler = pkgerrors.MarshalStack
 	zerolog.SetGlobalLevel(zerolog.Level(logLevel))
-	if logJSON {
+	if !logJSON {
 		log.Logger = log.Output(zerolog.ConsoleWriter{
 			Out: os.Stdout,
 		}).With().Timestamp().Logger()
@@ -116,7 +116,7 @@ func (app *App) TrackHostConnections(ctx context.Context) {
 
 func trackerParams(metrics *prometheus.Registry) connectiontracker.TrackerParams {
 	var deviceName string
-	flag.StringVar(&deviceName, "deviceName", "eth0", "Network Interface Device Name to track new connections.")
+	flag.StringVar(&deviceName, "deviceName", "eno1", "Network Interface Device Name to track new connections.")
 	flag.Parse()
 
 	firewall, err := connectiontracker.NewFirewall(deviceName)
