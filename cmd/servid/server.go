@@ -52,7 +52,7 @@ func (app *App) configureLogger() {
 	zerolog.TimeFieldFormat = "2006-01-02 15:04:05"
 	zerolog.ErrorStackMarshaler = pkgerrors.MarshalStack
 	zerolog.SetGlobalLevel(zerolog.Level(logLevel))
-	if logJSON == false {
+	if logJSON {
 		log.Logger = log.Output(zerolog.ConsoleWriter{
 			Out: os.Stdout,
 		}).With().Timestamp().Logger()
