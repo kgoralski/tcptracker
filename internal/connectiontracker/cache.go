@@ -66,12 +66,12 @@ func updatePorts(new *ConnEntry, old *ConnEntry) *ConnEntry {
 	defer m.RUnlock()
 	result := make(map[int]bool)
 	portsOld := old.Ports
-	for k, v := range portsOld {
-		result[k] = v
-	}
 	portsNew := new.Ports
-	for k, v := range portsNew {
-		result[k] = v
+	for k1, v1 := range portsOld {
+		for k2, v2 := range portsNew {
+			result[k1] = v1
+			result[k2] = v2
+		}
 	}
 	return &ConnEntry{
 		SrcIP: old.SrcIP,

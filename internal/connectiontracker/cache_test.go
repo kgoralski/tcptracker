@@ -111,3 +111,41 @@ func Test_connCache_getOrSet(t *testing.T) {
 		})
 	}
 }
+
+func Test_updatePorts(t *testing.T) {
+	srcIP := net.ParseIP("172.217.16.15")
+	dstIP := net.ParseIP("192.217.16.15")
+	entry1 := &ConnEntry{
+		SrcIP: &srcIP,
+		DstIP: &dstIP,
+		Ports: map[int]bool{
+			9090: true,
+			8080: true,
+			7070: true,
+		},
+	}
+	entry2 := &ConnEntry{
+		SrcIP: &srcIP,
+		DstIP: &dstIP,
+		Ports: map[int]bool{
+			9090: true,
+			8080: true,
+			5050: true,
+			6060: true,
+		},
+	}
+
+	expected := &ConnEntry{
+		SrcIP: &srcIP,
+		DstIP: &dstIP,
+		Ports: map[int]bool{
+			9090: true,
+			8080: true,
+			7070: true,
+			5050: true,
+			6060: true,
+		},
+	}
+	actual := updatePorts(entry1, entry2)
+	assert.Equal(t, expected, actual)
+}

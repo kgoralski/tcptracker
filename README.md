@@ -36,6 +36,8 @@
 * Makefile - for easy build / test scripting, most of the development is done locally, it is good enough to get fast feedback
 * Dockerfile - for containerization
 * golangci-lint linters
+* Github Actions CI - build, lint, tests
+* Codecov - test coverage
 
 To download Golang dependencies `make dep`
 ```makefile
@@ -156,8 +158,8 @@ docker_exec:
 * Running docker container as root - would need some work to run it in rootless mode
 * `RUN update-alternatives --install /sbin/iptables iptables /sbin/iptables-nft 10` inside the Dockerfile, my OS is using this by default
 * I would add better Configuration of the application with env variables, in 12factor manner
-* I would add CI like Github Actions
 * Not considered as production ready, something to take look https://github.com/kgoralski/microservice-production-readiness-checklist (but that's for backend development)
+* I would add fixtures for tests
 
 ## Known issues
 

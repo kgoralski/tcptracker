@@ -3,11 +3,11 @@
 > 1. How would you prove the code is correct?
 
 _Answer_: Unit testing, manual testing, testing in isolation on CI (maybe also integration testing) and in some testing environment. Having good enough test coverage and tests with race conditions.
-The directory `tools/pings.sh` also got small script to run to check port scanning detection.
+The directory `tools/pings.sh` also got small script to run to check port scanning detection. Added Github Actions CI.
 
 > 2. How would you make this solution better?
 
-_Answer_: It's better to use the `pcap` library instead of reading the file every 10 seconds, like on the Level 1. Other that I could think of adding the CI like Github Actions. Publish monitoring data to monitoring systems like Prometheus add some alerts if needed. Publish the docker container to image registry. I'm using the GoCache in my solution so using different backends under the hood would be also possible, or even chaining them. For real life scenario we would need probably more sophisticated Firewall Rules. I'm not firewall expert but looking at the different library during this task I would take look for `nftables` or `firewalld` that I think can support multiple backends. I could also find a better building tool than Makefile. Another thing would be the releasing the artifact process and publishing it.
+_Answer_: It's better to use the `pcap` library instead of reading the file every 10 seconds, like on the Level 1. I have added the Github Actions. Publish monitoring data to monitoring systems like Prometheus add some alerts if needed. Publish the docker container to image registry. I'm using the GoCache in my solution so using different backends under the hood would be also possible, or even chaining them. For real life scenario we would need probably more sophisticated Firewall Rules. I'm not firewall expert but looking at the different library during this task I would take look for `nftables` or `firewalld` that I think can support multiple backends. I could also find a better building tool than Makefile. Another thing would be the releasing the artifact process and publishing it.
 
 > 3. Is it possible for this program to miss a connection?
 
