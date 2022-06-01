@@ -24,6 +24,7 @@ I'm quite sure there are existing solutions out there to use. Maybe worth checki
 > 1. Why did you choose x to write the build automation?
 
 _Answer_: Mostly simplicity and availability in nearly every OS. For this task it was good enough because it helps during the development process with having fast feedback loops. For longer term for sure it would not be enough. 
+I have added the Github Actions CI because it's obvious choice when working with Github and easy to setup. 
 
 > 2. Is there anything else you would test if you had more time?
 

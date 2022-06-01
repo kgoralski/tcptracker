@@ -90,7 +90,9 @@ build:
 
 #### How to run a binary
 
-Running without sudo https://dbpilot.net/3-ways-to-list-all-iptables-rules-by-a-non-root-user/
+For simplification/shortcut you can try using `sudo` but it's not safe enough.
+I have faced few issues when using sudo on my local machine this is why you may want to avoid it. 
+https://dbpilot.net/3-ways-to-list-all-iptables-rules-by-a-non-root-user/
 
 `make gorun` - to run with Go
 `make run` - to run a binary from `./bin/tcptracker`
