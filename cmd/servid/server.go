@@ -49,12 +49,14 @@ func (app *App) configureLogger() {
 	var logLevel int
 	flag.BoolVar(&logJSON, "logJSON", false, "configure log format to be PLAIN or JSON")
 	flag.IntVar(&logLevel, "logLevel", 0, "configure log level")
-	zerolog.TimeFieldFormat = "2006-01-02 15:04:05"
+	timeFormat := "2006-01-02 15:04:05"
+	zerolog.TimeFieldFormat = timeFormat
 	zerolog.ErrorStackMarshaler = pkgerrors.MarshalStack
 	zerolog.SetGlobalLevel(zerolog.Level(logLevel))
 	if !logJSON {
 		log.Logger = log.Output(zerolog.ConsoleWriter{
-			Out: os.Stdout,
+			Out:        os.Stdout,
+			TimeFormat: timeFormat,
 		}).With().Timestamp().Logger()
 	}
 }
