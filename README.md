@@ -1,3 +1,5 @@
+[![tests](https://github.com/kgoralski/tcptracker/actions/workflows/tests.yml/badge.svg)](https://github.com/kgoralski/tcptracker/actions/workflows/tests.yml)
+
 # TCP Tracker
 
 * New Host connections tracking from interface like `eth0` using `google/gopacket (pcap)` library
