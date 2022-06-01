@@ -172,6 +172,6 @@ $ sudo iptables -D INPUT <line_number> # li
 ```
 or even remove whole chain
 ```
-$ sudo iptables --flush tcptrackerNew
-$ sudo iptables -X tcptrackerNew
+$ sudo iptables --flush tcptracker
+$ sudo iptables -X tcptracker
 ```
