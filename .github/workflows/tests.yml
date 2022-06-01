@@ -14,6 +14,6 @@ jobs:
       - uses: actions/checkout@v3
       - run: sudo apt-get update && sudo apt-get install libpcap-dev
       - run: make dep
-      - run: go test -v -coverprofile=coverage.out -covermode=atomic
+      - run: go test -v ./... -coverprofile=coverage.out -covermode=atomic
       - uses: codecov/codecov-action@v2
 
