@@ -185,13 +185,12 @@ func (t *Tracker) onDetectedPortScan(portScans chan *ConnEntry) {
 		if v.SrcIP == nil {
 			return
 		}
-		log.Info().Msgf("TCPTracker: Port scan detected: %s -> %s on Ports %v", v.SrcIP, v.DstIP, intMapToString(v.Ports))
+		log.Warn().Msgf("TCPTracker: Port scan detected: %s -> %s on Ports %v", v.SrcIP, v.DstIP, intMapToString(v.Ports))
 		ip := v.SrcIP.String()
 		err := t.firewall.Block(ip)
 		if err != nil {
 			log.Err(err).Send()
 		}
-		log.Info().Msgf("TCPTracker: Blocked %s IP", v.SrcIP)
 	}
 }
 
