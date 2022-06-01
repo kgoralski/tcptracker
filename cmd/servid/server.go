@@ -116,7 +116,7 @@ func (app *App) TrackHostConnections(ctx context.Context) {
 
 func trackerParams(metrics *prometheus.Registry) connectiontracker.TrackerParams {
 	var deviceName string
-	flag.StringVar(&deviceName, "deviceName", "eno1", "Network Interface Device Name to track new connections.")
+	flag.StringVar(&deviceName, "deviceName", "eth0", "Network Interface Device Name to track new connections.")
 	flag.Parse()
 
 	firewall, err := connectiontracker.NewFirewall(deviceName)
