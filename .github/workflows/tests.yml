@@ -7,8 +7,6 @@ jobs:
         go-version: [1.18.x]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    env:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
       - uses: actions/setup-go@v3
         with:
@@ -18,4 +16,6 @@ jobs:
       - run: make dep
       - run: go test -v ./... -coverprofile=coverage.out -covermode=atomic
       - uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
