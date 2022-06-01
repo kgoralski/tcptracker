@@ -16,4 +16,8 @@ jobs:
       - run: make dep
       - run: go test -v ./... -coverprofile=coverage.out -covermode=atomic
       - uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.out
+          fail_ci_if_error: true
 
