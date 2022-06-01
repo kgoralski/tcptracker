@@ -182,9 +182,6 @@ func isPortScanning(foundPorts, minimumPortScans int) bool {
 func (t *Tracker) onDetectedPortScan(portScans chan *ConnEntry) {
 	log.Info().Msg("TCPTracker: onDetectedPortScan is running...")
 	for v := range portScans {
-		if v.SrcIP == nil {
-			return
-		}
 		log.Warn().Msgf("TCPTracker: Port scan detected: %s -> %s on Ports %v", v.SrcIP, v.DstIP, intMapToString(v.Ports))
 		ip := v.SrcIP.String()
 		err := t.firewall.Block(ip)

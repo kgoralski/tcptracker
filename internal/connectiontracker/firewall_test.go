@@ -5,6 +5,7 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"net"
 	mock2 "tcptracker/mock"
 	"testing"
 )
@@ -100,4 +101,14 @@ func Test_newFW(t *testing.T) {
 	require.NoError(t, err)
 	fw := newFW(ipv4, "192.168.0.147")
 	require.NotNil(t, fw)
+}
+
+func Test_getLocalIPString(t *testing.T) {
+	actual1 := getLocalIPString(nil)
+	assert.Equal(t, "", actual1)
+
+	localIPString := "192.44.55.66"
+	localIP := net.ParseIP(localIPString)
+	actual2 := getLocalIPString(localIP)
+	assert.Equal(t, localIPString, actual2)
 }
