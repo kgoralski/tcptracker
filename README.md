@@ -95,6 +95,7 @@ I have faced few issues when using sudo on my local machine this is why you may 
 https://dbpilot.net/3-ways-to-list-all-iptables-rules-by-a-non-root-user/
 
 `make gorun` - to run with Go
+
 `make run` - to run a binary from `./bin/tcptracker`
 
 To pass the device interface name to binary you can use `-devicename eth0` flag
@@ -151,7 +152,7 @@ docker_exec:
 * Running a binary requires additional permissions `setcap cap_net_admin,cap_net_raw+ep ${BINARY_NAME}`
 * Running a docker with a privileges to Host network requires NET_ADMIN `docker run --name ${BINARY_NAME} --net=host --cap-add NET_ADMIN tcptracker:latest`
 
-## Shortcuts taken
+## Shortcuts taken & ideas for improvements
 * Added `TODOs` in source code to document _shortcuts_
 * More tests in table tests style
 * Concurrent tests are quite basic with a room for improvements
