@@ -115,6 +115,12 @@ func Test_connCache_getOrSet(t *testing.T) {
 func Test_updatePorts(t *testing.T) {
 	srcIP := net.ParseIP("172.217.16.15")
 	dstIP := net.ParseIP("192.217.16.15")
+
+	cacheManager := newCacheManager(1 * time.Second)
+	c := &connCache{
+		manager:  cacheManager.manager,
+		cacheTTL: 5 * time.Second,
+	}
 	entry1 := &ConnEntry{
 		SrcIP: &srcIP,
 		DstIP: &dstIP,
@@ -146,6 +152,6 @@ func Test_updatePorts(t *testing.T) {
 			6060: true,
 		},
 	}
-	actual := updatePorts(entry1, entry2)
+	actual := c.updatePorts(entry1, entry2)
 	assert.Equal(t, expected, actual)
 }

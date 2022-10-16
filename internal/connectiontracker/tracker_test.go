@@ -235,7 +235,9 @@ func generateConns(srcIP net.IP, dstIP net.IP) []*ConnEntry {
 func Test_prepareEntry(t *testing.T) {
 	packet := gopacket.NewPacket(testSimpleTCPPacket, layers.LinkTypeEthernet, gopacket.DecodeOptions{Lazy: true, NoCopy: true})
 	ipv4, tcp := decodeLayers(packet)
-	entry := prepareEntry(ipv4, tcp)
+
+	m := &sync.RWMutex{}
+	entry := prepareEntry(ipv4, tcp, m)
 	assert.NotNil(t, entry)
 	assert.Equal(t, "172.17.81.73", entry.SrcIP.String())
 	assert.Equal(t, "173.222.254.225", entry.DstIP.String())

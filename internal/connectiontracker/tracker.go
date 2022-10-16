@@ -54,6 +54,7 @@ type Tracker struct {
 	minimumPortScans int
 	firewall         Firewall
 	timeout          time.Duration
+	m                sync.RWMutex
 }
 
 // TrackerParams required params to run Tracker
@@ -124,12 +125,14 @@ func (t *Tracker) capture(newConnections chan *ConnEntry) {
 		}
 		ip4, tcp := decodeLayers(packet)
 		counter.Inc()
-		newConnections <- prepareEntry(ip4, tcp)
+		newConnections <- prepareEntry(ip4, tcp, &t.m)
 	}
 }
 
-func prepareEntry(ip4 *layers.IPv4, tcp *layers.TCP) *ConnEntry {
+func prepareEntry(ip4 *layers.IPv4, tcp *layers.TCP, m *sync.RWMutex) *ConnEntry {
 	log.Info().Msgf("New connection: %s:%v -> %s:%v", ip4.SrcIP, int(tcp.SrcPort), ip4.DstIP, int(tcp.DstPort))
+	m.RLock()
+	defer m.RUnlock()
 	entry := &ConnEntry{
 		SrcIP: &ip4.SrcIP,
 		DstIP: &ip4.DstIP,

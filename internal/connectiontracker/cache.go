@@ -17,6 +17,7 @@ type connCache struct {
 	// from as many goroutines as you want.
 	manager  *cache.Cache[*ConnEntry]
 	cacheTTL time.Duration
+	m        sync.RWMutex
 }
 
 // newCacheManager creates the instance of Cache, currently using gocache + ristretto
@@ -49,7 +50,7 @@ func (c *connCache) getOrSet(ctx context.Context, conn *ConnEntry) *ConnEntry {
 		}
 		return conn
 	}
-	toSave := updatePorts(conn, found)
+	toSave := c.updatePorts(conn, found)
 	errSet := c.manager.Set(ctx, key, toSave, store.WithExpiration(c.cacheTTL))
 	if errSet != nil {
 		log.Err(errSet)
@@ -57,13 +58,13 @@ func (c *connCache) getOrSet(ctx context.Context, conn *ConnEntry) *ConnEntry {
 	return found
 }
 
-func updatePorts(new *ConnEntry, old *ConnEntry) *ConnEntry {
+func (c *connCache) updatePorts(new *ConnEntry, old *ConnEntry) *ConnEntry {
 	// TODO: Mutex is only needed for this part, updating values in a map
 	// I need concurrent safe Set structure instead of map[int]bool
 	// Doesn't really matter because new goroutine would override same value
-	var m sync.RWMutex
-	m.RLock()
-	defer m.RUnlock()
+
+	c.m.RLock()
+	defer c.m.RUnlock()
 	result := make(map[int]bool)
 	portsOld := old.Ports
 	portsNew := new.Ports
